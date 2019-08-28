@@ -7,8 +7,8 @@ require_once 'modelo/enderecoModelo.php';
 function cadastro(){
     if (ehPost()){
        $nome = $_POST["nome"];
-        $email = $_POST["email"];
-        $senha = $_POST["senha"];
+       $email = $_POST["email"];
+       $senha = $_POST["senha"];
        $cpf = $_POST["cpf"];
        $sexo = $_POST ["sexo"];
        $dataNasc = $_POST ["dataNasc"];
@@ -35,7 +35,7 @@ function cadastro(){
          exibir("cliente/cadastro", $dados);
      }else{
          $mensagem = adicionarCadastro($nome,$cpf,$senha,$email,$sexo,$tipousuario,$dataNasc);
-        redirecionar("cliente/listarClientes");
+         redirecionar("cliente/listarClientes");
      }
       
    }else{
@@ -53,7 +53,6 @@ function contato(){
          if (valida_nao_vazio($nome) != NULL){
           $erros[]= "Você deve inserir um valor no campo Nome";  
       }
-      
       if (valida_nao_vazio_tipoEs($tel) != NULL){
           $erros[]= "Informe um valor numérico valido no campo Telefone.";    
       }
@@ -72,6 +71,7 @@ function listarClientes(){
 
 function ver($cod_cliente){
     $dados["cliente"] = pegarUsuarioPorId($cod_cliente);
+    $dados["enderecos"] = pegarEnderecosPorUsuario($cod_cliente);
     exibir("cliente/visualizar", $dados);
 }
 
@@ -90,10 +90,21 @@ function editar($cod_cliente){
       $dataNasc = $_POST ["dataNasc"];
       $tipousuario = $_POST ["tipousuario"];
        
-       editarCliente($cod_cliente, $nome,$email,$senha,$cpf,$sexo,$dataNasc,$tipousuario);
+       editarCliente($cod_cliente,$nome,$cpf,$senha,$email,$sexo,$tipousuario,$dataNasc);
        redirecionar("cliente/listarClientes");
 } else{
     $dados["cliente"] =  pegarUsuarioPorId($cod_cliente);
     exibir("cliente/cadastro",$dados);
 } 
+}
+
+function adicionar ($idusuario){
+    if (ehPost()) {
+         $logradouro = strip_tags($_POST["logradouro"]);
+        $numero = strip_tags($_POST["numero"]);
+        $complemento = strip_tags($_POST["complemento"]);
+        $bairro = strip_tags($_POST["bairro"]);
+        $cidade = strip_tags($_POST["cidade"]);
+        $cep = strip_tags($_POST["cep"]);
+    }
 }

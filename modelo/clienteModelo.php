@@ -35,11 +35,13 @@ function deletarCliente($cod_cliente){
 }
 
 function editarCliente($cod_cliente,$nome,$cpf,$senha,$email,$sexo,$tipousuario,$dataNasc){
-    $sql = "UPDATE cliente SET nome = $nome', cpf = '$cpf',senha = '$senha',email='$email',sexo='$sexo',tipousuario='$tipousuario',dataNasc= '$dataNasc'  WHERE cod_cliente = $cod_cliente";
+    $sql = "UPDATE cliente SET nome = '$nome', cpf = '$cpf',senha = '$senha',email='$email',sexo='$sexo',tipousuario='$tipousuario',dataNasc= '$dataNasc'  WHERE cod_cliente = $cod_cliente";
     $resultado = mysqli_query($conexao = conn(), $sql);
      if(!$resultado){ die('Erro ao editar cliente!' . mysqli_error($conexao)); }
     return 'Cliente alterado com sucesso!';
 }
+
+
 
 ?>
   

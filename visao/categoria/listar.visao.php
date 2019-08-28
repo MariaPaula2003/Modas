@@ -24,6 +24,3 @@
         <a href="./categoria/adicionarCategoria" class="btn btn-primary">Nova Categoria</a>
         
         <br><br>
-        
-        
-        <a href="./produto/adicionar">Voltar ao Cadastro do Produto</a>

@@ -45,8 +45,8 @@ function editar($cod_categoria){
      if (ehPost()){
        $nome = $_POST["nome"];
        
-       editarCategoria($nome);
-       redirecionar("produto/listarCategorias");
+       editarCategoria($nome, $cod_categoria);
+       redirecionar("categoria/listarCategorias");
 } else{
     $dados["categoria"] = pegarCategoriaPorId($cod_categoria);
     exibir("categoria/formulario", $dados);

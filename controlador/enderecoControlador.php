@@ -2,15 +2,16 @@
 
 require_once 'servico/validacaoServico.php';
 require_once 'modelo/enderecoModelo.php';
+require_once 'modelo/clienteModelo.php';
 
-function adicionar(){
+function adicionar($idusuario){
     if (ehPost()){
-        $logradouro = $_POST["logradouro"];
-        $numero = $_POST["numero"];
-        $complemento = $_POST["complemento"];
-        $bairro = $_POST["bairro"];
-        $cidade = $_POST["cidade"];
-        $cep = $_POST["cep"];
+        $logradouro = strip_tags($_POST["logradouro"]);
+        $numero = strip_tags($_POST["numero"]);
+        $complemento = strip_tags($_POST["complemento"]);
+        $bairro = strip_tags($_POST["bairro"]);
+        $cidade = strip_tags($_POST["cidade"]);
+        $cep = strip_tags($_POST["cep"]);
         
         $erros = array();
         
@@ -39,17 +40,19 @@ if(count($erros) > 0){
          $dados["erros"] = $erros;
          exibir("endereco/formulario", $dados);
      }else{
-         $mensagem = adicionarEndereco($logradouro,$numero,$complemento, $bairro,$cidade,$cep);
-        redirecionar("endereco/listarEnderecos");
+         $mensagem = adicionarEndereco($idusuario,$logradouro,$numero,$complemento, $bairro,$cidade,$cep);
+         echo $msg;
+        redirecionar("cliente/ver/$idusuario");
      }
     }else{
-   exibir("endereco/formulario");  
+        $dados["endereco"] = pegarEnderecoPorId($idusuario);
+        exibir("endereco/formulario", $dados);  
      }    
 }
 
 function listarEnderecos(){
     $dados = array();
-    $dados["enderecos"] = pegarTodosEnderecos();
+    $dados["enderecos"] = pegarEnderecosPorUsuario($cod_cliente);
     exibir("endereco/listar", $dados);
 }
 
@@ -72,7 +75,7 @@ function editar($idEndereco){
       $cep = $_POST["cep"];
         
       editarEndereco($idEndereco,$logradouro,$numero,$complemento, $bairro,$cidade,$cep);
-      redirecionar("endereco/listarEndrecos");
+      redirecionar("endereco/listarEnderecos");
 } else{
     $dados["endereco"] = pegarEnderecoPorId($idEndereco);
     exibir("endereco/formulario", $dados);

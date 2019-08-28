@@ -17,13 +17,16 @@ PRIMARY KEY (cod_cliente)
 
 CREATE TABLE endereco(
 idEndereco int(11) auto_increment not null,
+cod_cliente int(11) not null,
 logradouro varchar(50) not null,
 numero varchar(7) not null,
 complemento varchar(60) not null,
 bairro varchar(60) not null,
 cidade varchar(60) not null,
 cep varchar(10) not null,
-PRIMARY KEY (idEndereco)
+PRIMARY KEY (idEndereco),
+FOREIGN KEY (cod_cliente) REFERENCES cliente (cod_cliente)
+ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE log_produto(

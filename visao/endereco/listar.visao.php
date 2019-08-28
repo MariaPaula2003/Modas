@@ -1,6 +1,4 @@
-<h2>Listar Endreços</h2>
-        
-   <table class="table">
+<table class="table">
             <thead>
                 <tr>
                     <th>IdEndereco</th>
@@ -22,9 +20,4 @@
         <?php endforeach; ?>
    </table> 
         <br>
-        <a href="./endereco/adicionar" class="btn btn-primary">Novo Endereco</a>
-        <br><br>
         
-        
-        <a href="./cliente/cadastro">Voltar ao Cadastro do Cliente</a>
-   
